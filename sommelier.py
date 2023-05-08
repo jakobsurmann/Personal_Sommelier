@@ -151,7 +151,7 @@ with st.beta_expander("Option D: Individual Choice"):
         unique_filtered_varieties = sorted(wine_filtered['variety'].unique())
       
     # Dropdown menu for variety
-    selected_variety = st.selectbox('Choose a variety:', unique_filtered_varieties, key = 'selected_country_individual')
+    selected_variety = st.selectbox('Choose a variety:', unique_filtered_varieties, key = 'selected_variety_individual')
         
     # Filter countries based on selected variety and price range
     if min_price_input and max_price_input:
