@@ -88,9 +88,9 @@ with st.beta_expander("Option B: Recommendations based on your Euro price range"
             sample_size = min(len(recom1), 5)
             recom2 = recom1.sample(n=sample_size)
             recom3 = recom2.sort_values(by="points", ascending=False)
+            # Set an index for the recommended wines
             index_list_1 = []
             i = 1
-            # Set an index for the recommended wines
             for x in range(len(recom3)):
                 index_list_1.append(i)
                 i += 1
@@ -118,10 +118,11 @@ with st.beta_expander("Option C: Recommendations based on country"):
     wine_country_filtered = wine[wine['country'] == selected_country]
     # Give desired output for country
     if not wine_country_filtered.empty:
-        recom5 = wine_country_filtered[wine_country_filtered['points'] > 87]
+        recom5 = wine_country_filtered[wine_country_filtered['points'] > 91]
         sample_size = min(len(recom5), 5)
         recom6 = recom5.sample(n=sample_size)
         recom6 = recom6.sort_values(by='points', ascending = False)
+        # Set index for desired output
         index_list_2 = []
         i = 1
         for x in range(len(recom6)):
@@ -132,6 +133,7 @@ with st.beta_expander("Option C: Recommendations based on country"):
         recom7 = recom6[["title", "variety", "winery", "price", "points"]]
         st.write('Here are some wine recommendations from the selected country:')
         st.write(recom7)
+    # Give output if no high rated wines for the country available
     else:
         st.write('Sorry, we do not have wines from that country.')
         
@@ -149,9 +151,8 @@ with st.beta_expander("Option D: Individual Choice"):
     col1, col2 = st.beta_columns(2)
     min_price_input = col1.text_input('Min Price', key='min_price_input_individual').replace(',', '.')
     max_price_input = col2.text_input('Max Price', key='max_price_input_individual').replace(',', '.')
- 
-    
-    # Filter countries based on selected variety and price range
+     
+    # Filter varieties based on selected price range
     top_wines = wine[wine['points'] > 91]
     unique_varieties = sorted(top_wines['variety'].unique())
     if min_price_input and max_price_input:
@@ -183,37 +184,38 @@ with st.beta_expander("Option D: Individual Choice"):
         if min_price_input and max_price_input:
             min_price = float(min_price_input)
             max_price = float(max_price_input)
-
             wine_filtered = wine[(wine['price'].between(min_price, max_price)) & 
                                  (wine['country'] == selected_country) &
                                  (wine['variety'] == selected_variety)]
-
             recom_wine = wine_filtered[wine_filtered['points'] > 91]
-
+            # Output if wines are available
             if not recom_wine.empty:
                 sample_size = min(len(recom_wine), 5)
                 recom_wine_sample = recom_wine.sample(n=sample_size)
                 recom_wine_sample = recom_wine_sample.sort_values(by='points', ascending=False)
-
                 index_list = []
                 i = 1
                 for x in range(len(recom_wine_sample)):
                     index_list.append(i)
                     i += 1
-
                 recom_wine_sample_index = pd.Series(index_list, dtype="int64")
                 recom_wine_sample.set_index(recom_wine_sample_index, inplace=True)
-
                 recom_wine_results = recom_wine_sample[["title", "variety", "winery", "price", "points"]]
-
                 st.write('Here are some wine recommendations based on your chosen filters:')
                 st.write(recom_wine_results)
+            # Output if wines are not available
             else:
                 st.write('Sorry, we do not have wines that match your selected filters.')
+                
 st.write('')
+
+# Option D: Individual Search
 st.write('Option E: Search for wines by entering text:')
+
+# Create expandable field with a text field for input
 with st.beta_expander("Option E: Search by wine name"):
     search_query = st.text_input('Enter a wine name or keyword:')
+    # Create dropdown menu for wines that fit to the input
     if search_query:
         wine_search_results = wine[wine['title'].str.contains(search_query, case=False)]
         if not wine_search_results.empty:
@@ -222,6 +224,7 @@ with st.beta_expander("Option E: Search by wine name"):
             selected_wine = wine_search_results[wine_search_results['title'] == selected_wine_title]
             display_wine = selected_wine[["title", "points", "price"]]
             st.write(display_wine)
+        # Output if no wine has input key word
         else:
             st.write('No wines found with the given search query.')
 
