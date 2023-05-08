@@ -154,7 +154,7 @@ with st.beta_expander("Option D: Individual Choice"):
      
     # Filter varieties based on selected price range
     top_wines = wine[wine['points'] > 91]
-    unique_varieties = sorted(top_wines['variety'].unique())
+    unique_filtered_varieties = sorted(top_wines['variety'].unique())
     if min_price_input and max_price_input:
         min_price = float(min_price_input)
         max_price = float(max_price_input)
