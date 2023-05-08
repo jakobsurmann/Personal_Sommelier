@@ -49,7 +49,7 @@ def wine_random():
     wine_random = wine[(wine["points"] >= 91)]
     wine_random_sample = wine_random.sample(n=5)
     
-    # Set an index for the 5 recommendet wines
+    # Set an index for the 5 recommended wines
     index_list_random = []
     i = 1
     for x in range(len(wine_random_sample)):
@@ -83,12 +83,14 @@ with st.beta_expander("Option B: Recommendations based on your Euro price range"
         max_price = float(max_price_input)
         wine_price_filtered = wine[wine['price'].between(min_price, max_price)]
         recom1 = wine_price_filtered[wine_price_filtered['points'] > 91]
+        # Give maximum 5 different wines as output
         if len(recom10) >= 1:
             sample_size = min(len(recom1), 5)
             recom2 = recom1.sample(n=sample_size)
             recom3 = recom2.sort_values(by="points", ascending=False)
             index_list_1 = []
             i = 1
+            # Set an index for the recommended wines
             for x in range(len(recom3)):
                 index_list_1.append(i)
                 i += 1
@@ -97,6 +99,7 @@ with st.beta_expander("Option B: Recommendations based on your Euro price range"
             recom4 = recom3[["title", "variety", "winery", "price", "points"]]
             st.write('Here are recommendations in your desired price range')
             st.write(recom4)
+        # Create output for wrong input
         elif max_price < min_price:
             st.write('Your maximum price is below your minimum price. Please adjust your price range!')
         else: 
@@ -115,20 +118,20 @@ with st.beta_expander("Option C: Recommendations based on country"):
     wine_country_filtered = wine[wine['country'] == selected_country]
     # Give desired output for country
     if not wine_country_filtered.empty:
-        recom14 = wine_country_filtered[wine_country_filtered['points'] > 87]
-        sample_size = min(len(recom14), 5)
-        recom15 = recom14.sample(n=sample_size)
-        recom15 = recom15.sort_values(by='points', ascending = False)
-        index_list_12 = []
+        recom5 = wine_country_filtered[wine_country_filtered['points'] > 87]
+        sample_size = min(len(recom5), 5)
+        recom6 = recom5.sample(n=sample_size)
+        recom6 = recom6.sort_values(by='points', ascending = False)
+        index_list_2 = []
         i = 1
-        for x in range(len(recom15)):
-            index_list_12.append(i)
+        for x in range(len(recom6)):
+            index_list_2.append(i)
             i += 1
-        recom15_index = pd.Series(index_list_12, dtype="int64")
-        recom15.set_index(recom15_index, inplace = True)
-        recom16 = recom15[["title", "variety", "winery", "price", "points"]]
+        recom6_index = pd.Series(index_list_2, dtype="int64")
+        recom6.set_index(recom6_index, inplace = True)
+        recom7 = recom6[["title", "variety", "winery", "price", "points"]]
         st.write('Here are some wine recommendations from the selected country:')
-        st.write(recom16)
+        st.write(recom7)
     else:
         st.write('Sorry, we do not have wines from that country.')
         
