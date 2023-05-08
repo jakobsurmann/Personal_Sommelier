@@ -1,3 +1,9 @@
+# This code is the input for web-application powered by streamlit. It was created as part of an introduction to programming course.
+# The website aims to help people find a good wine based on their personal references such as countries, price range or variety. On top of that it provides the option to search for a specif wine in order to get the average rating for this wine.
+# Due to this, the website can be used by both, people that are planning to buy a new wine and want to get recommendations and people that are buying a new wine and want to check if it has a good rating.
+# The whole recommendations are based on a wine dataset consisting of about 130,000 different wines and providing information about country, price, variety, rating and more.
+
+
 #!/usr/bin/env python
 # coding: utf-8
 
@@ -36,13 +42,14 @@ st.write("Option A: Click the button below to get a random wine recommendation:"
 
 
 
-# Random wine recommendation
+# Random wine recommendation with wines rated above 91 (top 25%)
 
-# Define random function
+# Define random function 
 def wine_random():
     wine_random = wine[(wine["points"] >= 91)]
     wine_random_sample = wine_random.sample(n=5)
-
+    
+    # Set an index for the 5 recommendet wines
     index_list_random = []
     i = 1
     for x in range(len(wine_random_sample)):
@@ -75,21 +82,21 @@ with st.beta_expander("Option B: Recommendations based on your Euro price range"
         min_price = float(min_price_input)
         max_price = float(max_price_input)
         wine_price_filtered = wine[wine['price'].between(min_price, max_price)]
-        recom10 = wine_price_filtered[wine_price_filtered['points'] > 91]
+        recom1 = wine_price_filtered[wine_price_filtered['points'] > 91]
         if len(recom10) >= 1:
-            sample_size = min(len(recom10), 5)
-            recom11 = recom10.sample(n=sample_size)
-            recom12 = recom11.sort_values(by="points", ascending=False)
-            index_list_12 = []
+            sample_size = min(len(recom1), 5)
+            recom2 = recom1.sample(n=sample_size)
+            recom3 = recom2.sort_values(by="points", ascending=False)
+            index_list_1 = []
             i = 1
-            for x in range(len(recom12)):
-                index_list_12.append(i)
+            for x in range(len(recom3)):
+                index_list_1.append(i)
                 i += 1
-            recom12_index = pd.Series(index_list_12, dtype="int64")
-            recom12.set_index(recom12_index, inplace=True)
-            recom13 = recom12[["title", "variety", "winery", "price", "points"]]
+            recom3_index = pd.Series(index_list_1, dtype="int64")
+            recom3.set_index(recom3_index, inplace=True)
+            recom4 = recom3[["title", "variety", "winery", "price", "points"]]
             st.write('Here are recommendations in your desired price range')
-            st.write(recom13)
+            st.write(recom4)
         elif max_price < min_price:
             st.write('Your maximum price is below your minimum price. Please adjust your price range!')
         else: 
