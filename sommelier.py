@@ -29,7 +29,7 @@ print(wine['country'].isnull().sum())
 print(wine['variety'].isnull().sum())
 
 # Importing and adding picture to website
-image = Image.open('sommelier_v2.png')
+image = Image.open('sommelier_v3.png')
 st.image(image, width = 300, use_column_width="auto")
 
 # Title for the app
