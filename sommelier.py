@@ -166,6 +166,8 @@ with st.beta_expander("Option D: Individual Choice"):
     selected_variety = st.selectbox('Choose a variety:', unique_filtered_varieties, key = 'selected_variety_individual')
         
     # Filter countries based on selected variety and price range
+    top_wines = wine[wine['points'] > 91]
+    unique_varieties = sorted(top_wines['variety'].unique())
     if min_price_input and max_price_input:
         min_price = float(min_price_input)
         max_price = float(max_price_input)
