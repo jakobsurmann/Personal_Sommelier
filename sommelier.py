@@ -115,7 +115,7 @@ st.write('Option C: You are looking for a wine from a specific country? Please c
 with st.beta_expander("Option C: Recommendations based on country"):
     unique_countries = sorted(wine['country'].unique())
     selected_country = st.selectbox('Choose a country:', unique_countries)
-    wine_country_filtered = wine[wine['country'] == selected_country]
+    wine_country_filtered = wine[(wine['country'] == selected_country]) & (wine['points'] > 91)]
     # Give desired output for country
     if not wine_country_filtered.empty:
         recom5 = wine_country_filtered[wine_country_filtered['points'] > 91]
