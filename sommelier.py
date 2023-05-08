@@ -31,6 +31,7 @@ st.title("Wine recommendation")
 
 # Description
 st.write("Hello, I am your personal Sommelier. I can give you random wine recommendations, or recommendations based on your personal preferences.")
+st.write('')
 st.write("Option A: Click the button below to get a random wine recommendation:")
 
 
