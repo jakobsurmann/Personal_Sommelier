@@ -135,7 +135,7 @@ with st.beta_expander("Option C: Recommendations based on country"):
         st.write(recom7)
     # Give output if no high rated wines for the country available
     else:
-        st.write('Sorry, we do not have wines from that country.')
+        st.write('Sorry, we do not have highly rated wines from that country.')
         
 # Blank Line
 st.write('')
