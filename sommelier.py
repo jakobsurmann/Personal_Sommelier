@@ -84,7 +84,7 @@ with st.beta_expander("Option B: Recommendations based on your Euro price range"
         wine_price_filtered = wine[wine['price'].between(min_price, max_price)]
         recom1 = wine_price_filtered[wine_price_filtered['points'] > 91]
         # Give maximum 5 different wines as output
-        if len(recom10) >= 1:
+        if len(recom1) >= 1:
             sample_size = min(len(recom1), 5)
             recom2 = recom1.sample(n=sample_size)
             recom3 = recom2.sort_values(by="points", ascending=False)
