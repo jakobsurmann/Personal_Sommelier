@@ -139,19 +139,18 @@ with st.beta_expander("Option D: Individual Choice"):
     min_price_input = col1.text_input('Min Price', key='min_price_input_individual').replace(',', '.')
     max_price_input = col2.text_input('Max Price', key='max_price_input_individual').replace(',', '.')
  
-    # Dropdown menu for variety
+     # Dropdown menu for variety
+    top_wines = wine[wine['points'] > 91]
+    unique_varieties = sorted(top_wines['variety'].unique())
+    selected_variety = st.selectbox('Choose a variety:', unique_varieties, key='selected_variety_individual')
+
     if min_price_input and max_price_input:
         min_price = float(min_price_input)
         max_price = float(max_price_input)
         wine_filtered_by_price = wine[(wine['price'].between(min_price, max_price)) &
                                   (wine['points'] > 91)]
         unique_varieties = sorted(wine_filtered_by_price['variety'].unique())
-    else:
-        top_wines = wine[wine['points'] > 91]
-        unique_varieties = sorted(top_wines['variety'].unique())
-
-        selected_variety = st.selectbox('Choose a variety:', unique_varieties, key='selected_variety_individual')
-    
+        
     # Filter countries based on selected variety and price range
     if min_price_input and max_price_input:
         min_price = float(min_price_input)
