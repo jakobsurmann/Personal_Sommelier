@@ -2,6 +2,7 @@
 # The website aims to help people find a good wine based on their personal references such as countries, price range or variety. On top of that it provides the option to search for a specif wine in order to get the average rating for this wine.
 # Due to this, the website can be used by both, people that are planning to buy a new wine and want to get recommendations and people that are buying a new wine and want to check if it has a good rating.
 # The whole recommendations are based on a wine dataset consisting of about 130,000 different wines and providing information about country, price, variety, rating and more.
+# This code works with a dataset that was adjusted manually. In contrast to the original python code, this dataset does not include unneccessary columns.
 
 
 #!/usr/bin/env python
